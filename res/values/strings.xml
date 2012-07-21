@@ -2,6 +2,8 @@
 
     <string name="app_name">Android Client Server</string>
     <string name="menu_exit">Exit</string>
+    <string name="menu_about">About</string>
     <string name="title_activity_main">Android Client Server</string>
-
+	<string name="dialog_action_dismiss">@android:string/ok</string>
+	<string name="dialog_action_title">About Android Client Server App</string>
 </resources>
