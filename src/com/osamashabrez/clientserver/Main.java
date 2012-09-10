@@ -1,28 +1,54 @@
 package com.osamashabrez.clientserver;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ListActivity;
 import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.widget.ArrayAdapter;
 
-public class Main extends Activity {
+public class Main extends ListActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_activity);
+        /* 
+         * requesting for indeterminate progress
+         * icon as we have to call our asyc task
+         * to perform queries on network. This
+         * will let the user know app is
+         * still processing in background
+         */
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+    	String[] listitems = {"Game 1", "Game 2", "Game 3"};
+    	ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.list_view, listitems);
+    	this.setListAdapter(adapter);
     }
 
+    public void onWindowFocusChanged(boolean hasFocus) {
+    	super.onWindowFocusChanged(hasFocus);
+    	// activating the progress bar
+    	setProgressBarIndeterminateVisibility(true);
+    }
+
+    /* 
+     * Lets add some gold plating to our application
+     * Will add an option menu with about and exit
+     * menu items
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_activity, menu);
         return true;
     }
-    
+
+    /*
+     * Driver for the option menu created above
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
     	try {
